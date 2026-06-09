@@ -15,6 +15,12 @@ const DEFAULT_SETTINGS: QuickTagSettings = {
   collapsedGroups: []
 };
 
+interface PersistedQuickTagSettings {
+  presetTags: string[];
+  maxRecentTags: number;
+  collapsedGroups: string[];
+}
+
 export default class QuickTagPlugin extends Plugin {
   settings: QuickTagSettings = Object.assign({}, DEFAULT_SETTINGS);
   private readonly lastKnownFileTags = new Map<string, string[]>();
@@ -82,6 +88,7 @@ export default class QuickTagPlugin extends Plugin {
     this.settings.recentTags = this.settings.recentTags.filter(
       (tag) => !this.shouldExcludeFromRecent(tag)
     );
+    this.saveRecentTags();
     await this.saveSettings();
     this.refreshViews(true);
   }
@@ -90,13 +97,14 @@ export default class QuickTagPlugin extends Plugin {
     const boundedValue = Math.max(5, Math.min(50, maxRecentTags));
     this.settings.maxRecentTags = boundedValue;
     this.settings.recentTags = this.settings.recentTags.slice(0, boundedValue);
+    this.saveRecentTags();
     await this.saveSettings();
     this.refreshViews(true);
   }
 
   async clearRecentTags(): Promise<void> {
     this.settings.recentTags = [];
-    await this.saveSettings();
+    this.saveRecentTags();
     this.refreshViews(true);
   }
 
@@ -114,7 +122,7 @@ export default class QuickTagPlugin extends Plugin {
     next.unshift(normalizedTag);
 
     this.settings.recentTags = next.slice(0, this.settings.maxRecentTags);
-    await this.saveSettings();
+    this.saveRecentTags();
   }
 
   isGroupCollapsed(groupPath: string): boolean {
@@ -143,10 +151,11 @@ export default class QuickTagPlugin extends Plugin {
   private async loadSettings(): Promise<void> {
     const loadedData: unknown = await this.loadData();
     const loaded = this.parseLoadedSettings(loadedData);
+    const localRecentTags = this.loadRecentTags();
 
     this.settings = {
       presetTags: this.normalizeTags(loaded.presetTags),
-      recentTags: this.normalizeTags(loaded.recentTags),
+      recentTags: this.normalizeTags(localRecentTags ?? loaded.recentTags),
       maxRecentTags: Math.max(5, Math.min(50, loaded.maxRecentTags)),
       collapsedGroups: this.normalizeTags(loaded.collapsedGroups)
     };
@@ -159,10 +168,21 @@ export default class QuickTagPlugin extends Plugin {
       0,
       this.settings.maxRecentTags
     );
+
+    if (localRecentTags === null && loaded.recentTags.length > 0) {
+      this.saveRecentTags();
+      await this.saveSettings();
+    }
   }
 
   private async saveSettings(): Promise<void> {
-    await this.saveData(this.settings);
+    const persistedSettings: PersistedQuickTagSettings = {
+      presetTags: this.settings.presetTags,
+      maxRecentTags: this.settings.maxRecentTags,
+      collapsedGroups: this.settings.collapsedGroups
+    };
+
+    await this.saveData(persistedSettings);
   }
 
   private snapshotActiveFileTags(): void {
@@ -277,6 +297,31 @@ export default class QuickTagPlugin extends Plugin {
       maxRecentTags: this.pickNumber(raw.maxRecentTags, DEFAULT_SETTINGS.maxRecentTags),
       collapsedGroups: this.pickStringArray(raw.collapsedGroups)
     };
+  }
+
+  private loadRecentTags(): string[] | null {
+    const storedValue = globalThis.localStorage.getItem(this.getRecentTagsStorageKey());
+    if (storedValue === null) {
+      return null;
+    }
+
+    try {
+      const parsedValue: unknown = JSON.parse(storedValue);
+      return this.pickStringArray(parsedValue);
+    } catch {
+      return [];
+    }
+  }
+
+  private saveRecentTags(): void {
+    globalThis.localStorage.setItem(
+      this.getRecentTagsStorageKey(),
+      JSON.stringify(this.settings.recentTags)
+    );
+  }
+
+  private getRecentTagsStorageKey(): string {
+    return `${this.manifest.id}:${this.app.vault.getName()}:recentTags`;
   }
 
   private pickStringArray(value: unknown): string[] {
