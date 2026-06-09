@@ -1,4 +1,5 @@
 import {
+  Component,
   ItemView,
   Notice,
   type TFile,
@@ -15,19 +16,13 @@ interface MutableTreeNode {
   children: Map<string, MutableTreeNode>;
 }
 
-interface AppWithSettingApi {
-  setting?: {
-    open: () => void;
-    openTabById: (id: string) => void;
-  };
-}
-
 interface FrontmatterWithTags {
   tags?: unknown;
 }
 
 export class TagPanelView extends ItemView {
   private readonly plugin: QuickTagPlugin;
+  private renderComponent: Component | null = null;
   private tagButtons = new Map<string, HTMLButtonElement[]>();
 
   constructor(leaf: WorkspaceLeaf, plugin: QuickTagPlugin) {
@@ -52,6 +47,8 @@ export class TagPanelView extends ItemView {
   }
 
   async onClose(): Promise<void> {
+    this.renderComponent?.unload();
+    this.renderComponent = null;
     this.tagButtons.clear();
   }
 
@@ -75,20 +72,23 @@ export class TagPanelView extends ItemView {
   }
 
   private render(): void {
+    this.renderComponent?.unload();
+    this.renderComponent = new Component();
+
     const { contentEl } = this;
     contentEl.empty();
     this.tagButtons = new Map<string, HTMLButtonElement[]>();
 
     const panel = contentEl.createDiv({ cls: "quick-tag-panel" });
-    this.renderToolbar(panel);
+    this.renderToolbar(panel, this.renderComponent);
     const columns = panel.createDiv({ cls: "quick-tag-columns" });
 
-    this.renderPresetColumn(columns);
-    this.renderRecentColumn(columns);
+    this.renderPresetColumn(columns, this.renderComponent);
+    this.renderRecentColumn(columns, this.renderComponent);
     this.refreshActiveStates();
   }
 
-  private renderToolbar(panelEl: HTMLDivElement): void {
+  private renderToolbar(panelEl: HTMLDivElement, component: Component): void {
     const toolbarEl = panelEl.createDiv({ cls: "quick-tag-toolbar" });
 
     const clearCurrentNoteTagsButton = toolbarEl.createEl("button", {
@@ -100,27 +100,15 @@ export class TagPanelView extends ItemView {
       }
     });
 
-    clearCurrentNoteTagsButton.addEventListener("click", () => {
+    component.registerDomEvent(clearCurrentNoteTagsButton, "click", () => {
       void this.clearCurrentNoteTags();
-    });
-
-    const settingsButton = toolbarEl.createEl("button", {
-      cls: "quick-tag-toolbar-button",
-      text: "Settings",
-      attr: {
-        "aria-label": "Open plugin settings",
-        "data-tooltip-position": "top"
-      }
-    });
-
-    settingsButton.addEventListener("click", () => {
-      const appWithSetting = this.app as unknown as AppWithSettingApi;
-      appWithSetting.setting?.open();
-      appWithSetting.setting?.openTabById(this.plugin.manifest.id);
     });
   }
 
-  private renderPresetColumn(columnsEl: HTMLDivElement): void {
+  private renderPresetColumn(
+    columnsEl: HTMLDivElement,
+    component: Component
+  ): void {
     const columnEl = columnsEl.createDiv({ cls: "quick-tag-column" });
     columnEl.createEl("h6", {
       cls: "quick-tag-column-header",
@@ -131,11 +119,14 @@ export class TagPanelView extends ItemView {
     const tree = this.buildTagTree(this.plugin.settings.presetTags);
 
     for (const node of tree) {
-      this.renderTreeNode(bodyEl, node);
+      this.renderTreeNode(bodyEl, node, component);
     }
   }
 
-  private renderRecentColumn(columnsEl: HTMLDivElement): void {
+  private renderRecentColumn(
+    columnsEl: HTMLDivElement,
+    component: Component
+  ): void {
     const columnEl = columnsEl.createDiv({ cls: "quick-tag-column" });
     columnEl.createEl("h6", {
       cls: "quick-tag-column-header",
@@ -153,13 +144,17 @@ export class TagPanelView extends ItemView {
 
     const listEl = bodyEl.createDiv({ cls: "quick-tag-recent-list" });
     for (const tag of this.plugin.settings.recentTags) {
-      this.createTagChip(listEl, tag, tag);
+      this.createTagChip(listEl, tag, tag, component);
     }
   }
 
-  private renderTreeNode(containerEl: HTMLDivElement, node: TagTreeNode): void {
+  private renderTreeNode(
+    containerEl: HTMLDivElement,
+    node: TagTreeNode,
+    component: Component
+  ): void {
     if (node.isLeaf) {
-      this.createTagChip(containerEl, node.name, node.fullPath);
+      this.createTagChip(containerEl, node.name, node.fullPath, component);
       return;
     }
 
@@ -177,6 +172,7 @@ export class TagPanelView extends ItemView {
       headerEl,
       node.name,
       node.fullPath,
+      component,
       hasSingleLeafChild
         ? "quick-tag-chip-parent quick-tag-chip-parent-inline"
         : "quick-tag-chip-parent"
@@ -189,13 +185,13 @@ export class TagPanelView extends ItemView {
       });
 
       const child = node.children[0];
-      this.createTagChip(headerEl, child.name, child.fullPath);
+      this.createTagChip(headerEl, child.name, child.fullPath, component);
       return;
     }
 
     const childrenEl = groupEl.createDiv({ cls: "quick-tag-group-children" });
     for (const child of node.children) {
-      this.renderTreeNode(childrenEl, child);
+      this.renderTreeNode(childrenEl, child, component);
     }
   }
 
@@ -203,6 +199,7 @@ export class TagPanelView extends ItemView {
     containerEl: HTMLElement,
     label: string,
     fullPath: string,
+    component: Component,
     extraClass?: string
   ): void {
     const button = containerEl.createEl("button", {
@@ -215,7 +212,7 @@ export class TagPanelView extends ItemView {
       }
     });
 
-    button.addEventListener("click", () => {
+    component.registerDomEvent(button, "click", () => {
       void this.toggleTag(fullPath);
     });
 

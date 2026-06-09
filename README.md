@@ -12,17 +12,16 @@ Quickly add or remove note tags in a sidebar panel for Obsidian.
 ## Features
 
 - Sidebar panel with two columns:
-- Left column: preset tags displayed as slash-path hierarchy (for example: `project/frontend/ui`)
-- Right column: recent tags, newest first
+  - Left column: preset tags displayed as slash-path hierarchy (for example: `project/frontend/ui`)
+  - Right column: recent tags, newest first
 - Click any tag chip to toggle that tag in the active note frontmatter (`tags`)
 - Active frontmatter tags are highlighted in the panel
-- Toolbar actions:
-- `Clear current tags`: clear all frontmatter tags for the active note
-- `Settings`: jump directly to the plugin settings page
+- Toolbar action:
+  - `Clear current tags`: clear all frontmatter tags for the active note
 - Recent tag behavior:
-- New tags added in notes are automatically tracked from metadata updates
-- Preset tags (and their parent paths) are excluded from recent tags
-- Maximum recent tags is configurable from 5 to 50
+  - New tags added in notes are automatically tracked from metadata updates
+  - Preset tags (and their parent paths) are excluded from recent tags
+  - Maximum recent tags is configurable from 5 to 50
 - Responsive layout for narrow sidebars
 
 ## Requirements
@@ -42,9 +41,9 @@ This project uses npm and locks dependency resolution with `package-lock.json`.
 
 2. Copy these files to your vault plugin directory:
 
-- `main.js`
-- `manifest.json`
-- `styles.css`
+   - `main.js`
+   - `manifest.json`
+   - `styles.css`
 
 Example target path:
 
@@ -57,16 +56,16 @@ Example target path:
 ## Usage
 
 1. Open the tag panel:
-- Run command `Show tag panel`, or
-- Restart Obsidian after first install (the panel is auto-opened when layout is ready)
+   - Run command `Show tag panel`, or
+   - Restart Obsidian after first install (the panel is auto-opened when layout is ready)
 2. Configure preset tags:
-- Settings -> Community plugins -> Quick Tag
-- Enter one tag per line in `Tag list`
-- Use `/` to define hierarchy
+   - Settings -> Community plugins -> Quick Tag
+   - Enter one tag per line in `Tag list`
+   - Use `/` to define hierarchy
 3. Toggle tags by clicking chips in either preset or recent columns.
 4. Manage recent tags:
-- Set `Maximum recent tags` between 5 and 50
-- Use `Clear recent tags` in settings to reset the recent list
+   - Set `Maximum recent tags` between 5 and 50
+   - Use `Clear recent tags` in settings to reset the recent list
 
 ## Notes
 
