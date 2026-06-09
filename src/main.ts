@@ -206,7 +206,7 @@ export default class QuickTagPlugin extends Plugin {
       return [];
     }
 
-    const frontmatterRaw = (cache.frontmatter as Record<string, unknown> | undefined)?.tags;
+    const frontmatterRaw: unknown = cache.frontmatter?.tags;
     const frontmatterTags = this.pickTags(frontmatterRaw);
     const inlineTags = Array.isArray(cache.tags)
       ? cache.tags.map((item) => item.tag)

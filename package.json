@@ -2,7 +2,7 @@
   "name": "quick-tag",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "yarn@4.13.0",
+  "packageManager": "npm@11.16.0",
   "description": "Obsidian sidebar plugin for toggling frontmatter tags.",
   "scripts": {
     "build": "node esbuild.config.mjs production",

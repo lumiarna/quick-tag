@@ -1,6 +1,6 @@
 ---
 created: 2026-03-11T14:37:00
-updated: 2026-04-18T17:04:00
+updated: 2026-06-09T20:40:43
 ---
 
 # Quick Tag
@@ -34,14 +34,11 @@ updated: 2026-04-18T17:04:00
 1. 构建插件：
 
 ```bash
-corepack enable
-yarn set version stable
-yarn config set nodeLinker pnp
-yarn install
-yarn build
+npm install
+npm run build
 ```
 
-本项目使用 Yarn PnP，不依赖 `node_modules` 目录。
+本项目使用 npm，并通过 `package-lock.json` 锁定依赖解析。
 
 2. 将以下文件复制到你的 vault 插件目录：
 
@@ -79,9 +76,9 @@ yarn build
 ## 开发
 
 ```bash
-yarn dev
-yarn build
-yarn lint
+npm run dev
+npm run build
+npm run lint
 ```
 
 ## 许可证

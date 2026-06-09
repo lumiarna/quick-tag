@@ -1,6 +1,6 @@
 ---
 created: 2026-03-11T14:37:00
-updated: 2026-04-18T17:12:00
+updated: 2026-06-09T20:40:43
 ---
 
 # Quick Tag
@@ -34,14 +34,11 @@ Quickly add or remove note tags in a sidebar panel for Obsidian.
 1. Build the plugin:
 
 ```bash
-corepack enable
-yarn set version stable
-yarn config set nodeLinker pnp
-yarn install
-yarn build
+npm install
+npm run build
 ```
 
-This project uses Yarn PnP, so dependencies are managed without `node_modules`.
+This project uses npm and locks dependency resolution with `package-lock.json`.
 
 2. Copy these files to your vault plugin directory:
 
@@ -79,9 +76,9 @@ Example target path:
 ## Development
 
 ```bash
-yarn dev
-yarn build
-yarn lint
+npm run dev
+npm run build
+npm run lint
 ```
 
 ## License
