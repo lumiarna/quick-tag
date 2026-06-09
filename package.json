@@ -1,0 +1,26 @@
+{
+  "name": "quick-tag",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "yarn@4.13.0",
+  "description": "Obsidian sidebar plugin for toggling frontmatter tags.",
+  "scripts": {
+    "build": "node esbuild.config.mjs production",
+    "dev": "node esbuild.config.mjs",
+    "lint": "eslint src/ --max-warnings 0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@eslint/json": "^0.14.0",
+    "@types/node": "^20.16.5",
+    "@typescript-eslint/eslint-plugin": "^8.46.0",
+    "@typescript-eslint/parser": "^8.46.0",
+    "builtin-modules": "^4.0.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.12.0",
+    "eslint-plugin-obsidianmd": "^0.1.9",
+    "obsidian": "latest",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.46.0"
+  }
+}
