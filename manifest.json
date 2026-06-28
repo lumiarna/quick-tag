@@ -1,10 +1,10 @@
 {
-  "id": "quick-tag",
-  "name": "Quick Tag",
-  "version": "0.1.1",
-  "minAppVersion": "1.4.0",
-  "description": "Quickly add or remove frontmatter tags from a sidebar panel.",
-  "author": "SONGSH2",
-  "authorUrl": "",
-  "isDesktopOnly": false
+	"id": "quick-tag",
+	"name": "Quick Tag",
+	"version": "0.1.2",
+	"minAppVersion": "1.4.0",
+	"description": "Quickly add or remove frontmatter tags from a sidebar panel.",
+	"author": "SONGSH2",
+	"authorUrl": "",
+	"isDesktopOnly": false
 }

@@ -80,6 +80,26 @@ npm run build
 npm run lint
 ```
 
+## Release
+
+1. Bump the version with npm so `package.json`, `manifest.json`, and `versions.json` stay in sync:
+
+```bash
+npm version 0.1.3
+```
+
+2. Push the commit and tag:
+
+```bash
+git push --follow-tags
+```
+
+3. GitHub Actions will then:
+
+- Verify the Git tag matches `package.json`, `manifest.json`, and an entry in `versions.json`
+- Build the plugin
+- Create the GitHub release with `main.js`, `manifest.json`, and `styles.css`
+
 ## License
 
 MIT

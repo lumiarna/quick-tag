@@ -25,14 +25,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Verify tag matches manifest version
+      - name: Verify release version metadata
         run: |
           TAG="${GITHUB_REF_NAME}"
-          VERSION="$(node -p "require('./manifest.json').version")"
-          if [ "$TAG" != "$VERSION" ]; then
-            echo "Tag '$TAG' must match manifest.json version '$VERSION'."
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+          MANIFEST_VERSION="$(node -p "require('./manifest.json').version")"
+          if [ "$TAG" != "$PACKAGE_VERSION" ]; then
+            echo "Tag '$TAG' must match package.json version '$PACKAGE_VERSION'."
             exit 1
           fi
+          if [ "$PACKAGE_VERSION" != "$MANIFEST_VERSION" ]; then
+            echo "package.json version '$PACKAGE_VERSION' must match manifest.json version '$MANIFEST_VERSION'."
+            exit 1
+          fi
+          node -e "const versions=require('./versions.json'); if (!(process.argv[1] in versions)) { console.error(\`versions.json is missing ${process.argv[1]}\`); process.exit(1); }" "$TAG"
 
       - name: Build
         run: npm run build

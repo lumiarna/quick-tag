@@ -81,6 +81,26 @@ npm run build
 npm run lint
 ```
 
+## 发布
+
+1. 通过 npm 升级版本，这样 `package.json`、`manifest.json` 和 `versions.json` 会保持同步：
+
+```bash
+npm version 0.1.3
+```
+
+2. 推送提交和 tag：
+
+```bash
+git push --follow-tags
+```
+
+3. 随后 GitHub Actions 会自动：
+
+- 校验 Git tag 与 `package.json`、`manifest.json` 以及 `versions.json` 中的版本记录一致
+- 构建插件
+- 创建 GitHub release，并上传 `main.js`、`manifest.json`、`styles.css`
+
 ## 许可证
 
 MIT

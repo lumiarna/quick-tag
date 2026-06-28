@@ -1,12 +1,13 @@
 {
   "name": "quick-tag",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "packageManager": "npm@11.16.0",
   "description": "Obsidian sidebar plugin for toggling frontmatter tags.",
   "scripts": {
     "build": "node esbuild.config.mjs production",
     "dev": "node esbuild.config.mjs",
+    "version": "node version-bump.mjs && git add manifest.json versions.json",
     "lint": "eslint src/ --max-warnings 0"
   },
   "devDependencies": {
