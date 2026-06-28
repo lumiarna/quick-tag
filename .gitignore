@@ -2,3 +2,4 @@ node_modules/
 .sessions/
 data.json
 .DS_Store
+.pycache/
