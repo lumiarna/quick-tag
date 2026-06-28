@@ -88,10 +88,9 @@ npm run lint
 npm version 0.1.3
 ```
 
-2. Push the commit and tag:
+2. Push the commit and tag created by `npm version`:
 
 ```bash
-git tag 0.1.3
 git push --follow-tags
 ```
 
@@ -101,6 +100,8 @@ git push --follow-tags
 - Require the Git tag to use plain semver without a `v` prefix
 - Build the plugin
 - Create the GitHub release with `main.js`, `manifest.json`, and `styles.css`
+
+The repository `.npmrc` sets `tag-version-prefix=` so `npm version` creates tags like `0.1.3`, not `v0.1.3`.
 
 ## License
 

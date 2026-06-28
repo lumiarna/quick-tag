@@ -89,10 +89,9 @@ npm run lint
 npm version 0.1.3
 ```
 
-2. 推送提交和 tag：
+2. 推送 `npm version` 创建的提交和 tag：
 
 ```bash
-git tag 0.1.3
 git push --follow-tags
 ```
 
@@ -102,6 +101,8 @@ git push --follow-tags
 - 要求 Git tag 使用不带 `v` 前缀的纯语义化版本号
 - 构建插件
 - 创建 GitHub release，并上传 `main.js`、`manifest.json`、`styles.css`
+
+仓库 `.npmrc` 设置了 `tag-version-prefix=`，因此 `npm version` 会创建 `0.1.3` 这种 tag，而不是 `v0.1.3`。
 
 ## 许可证
 
