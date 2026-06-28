@@ -40,8 +40,8 @@
   flex-direction: column;
   gap: 4px;
   min-height: 0;
-  overflow: auto;
-  padding-right: 2px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .quick-tag-group {
