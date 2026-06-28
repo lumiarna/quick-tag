@@ -92,12 +92,14 @@ npm version 0.1.3
 2. 推送提交和 tag：
 
 ```bash
+git tag 0.1.3
 git push --follow-tags
 ```
 
 3. 随后 GitHub Actions 会自动：
 
 - 校验 Git tag 与 `package.json`、`manifest.json` 以及 `versions.json` 中的版本记录一致
+- 要求 Git tag 使用不带 `v` 前缀的纯语义化版本号
 - 构建插件
 - 创建 GitHub release，并上传 `main.js`、`manifest.json`、`styles.css`
 

@@ -31,7 +31,7 @@ jobs:
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
           MANIFEST_VERSION="$(node -p "require('./manifest.json').version")"
           if [ "$TAG" != "$PACKAGE_VERSION" ]; then
-            echo "Tag '$TAG' must match package.json version '$PACKAGE_VERSION'."
+            echo "Tag '$TAG' must match package.json version '$PACKAGE_VERSION' and must not include a 'v' prefix."
             exit 1
           fi
           if [ "$PACKAGE_VERSION" != "$MANIFEST_VERSION" ]; then

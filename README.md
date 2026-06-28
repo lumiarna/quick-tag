@@ -91,12 +91,14 @@ npm version 0.1.3
 2. Push the commit and tag:
 
 ```bash
+git tag 0.1.3
 git push --follow-tags
 ```
 
 3. GitHub Actions will then:
 
 - Verify the Git tag matches `package.json`, `manifest.json`, and an entry in `versions.json`
+- Require the Git tag to use plain semver without a `v` prefix
 - Build the plugin
 - Create the GitHub release with `main.js`, `manifest.json`, and `styles.css`
 
