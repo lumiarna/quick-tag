@@ -1,6 +1,6 @@
 {
   "name": "quick-tag",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "packageManager": "npm@11.16.0",
   "description": "Obsidian sidebar plugin for toggling frontmatter tags.",
