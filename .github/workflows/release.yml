@@ -26,19 +26,7 @@ jobs:
         run: npm ci
 
       - name: Verify release version metadata
-        run: |
-          TAG="${GITHUB_REF_NAME}"
-          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
-          MANIFEST_VERSION="$(node -p "require('./manifest.json').version")"
-          if [ "$TAG" != "$PACKAGE_VERSION" ]; then
-            echo "Tag '$TAG' must match package.json version '$PACKAGE_VERSION' and must not include a 'v' prefix."
-            exit 1
-          fi
-          if [ "$PACKAGE_VERSION" != "$MANIFEST_VERSION" ]; then
-            echo "package.json version '$PACKAGE_VERSION' must match manifest.json version '$MANIFEST_VERSION'."
-            exit 1
-          fi
-          node -e "const versions=require('./versions.json'); if (!(process.argv[1] in versions)) { console.error(\`versions.json is missing ${process.argv[1]}\`); process.exit(1); }" "$TAG"
+        run: node scripts/verify-release.mjs "${GITHUB_REF_NAME}"
 
       - name: Build
         run: npm run build
