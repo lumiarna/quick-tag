@@ -61,8 +61,8 @@ export class TagPanelView extends ItemView {
     this.refreshActiveStates();
   }
 
-  refreshActiveStates(): void {
-    const activeTags = new Set(this.getActiveFileTags());
+  refreshActiveStates(tags = this.getActiveFileTags()): void {
+    const activeTags = new Set(tags);
     for (const [tag, buttons] of this.tagButtons) {
       const isActive = activeTags.has(tag);
       for (const button of buttons) {
@@ -228,16 +228,17 @@ export class TagPanelView extends ItemView {
       return;
     }
 
+    let nextTags: string[] = [];
     await this.app.fileManager.processFrontMatter(file, (frontmatter) => {
       const frontmatterData = frontmatter as FrontmatterWithTags;
       const tags = this.parseTagValue(frontmatterData.tags);
-      const nextTags = tags.includes(tag)
+      nextTags = tags.includes(tag)
         ? tags.filter((item) => item !== tag)
         : [...tags, tag];
 
       frontmatterData.tags = nextTags;
     });
-    this.refresh(true);
+    this.refreshActiveStates(nextTags);
   }
 
   private async clearCurrentNoteTags(): Promise<void> {
@@ -252,7 +253,7 @@ export class TagPanelView extends ItemView {
       frontmatterData.tags = [];
     });
 
-    this.refresh(true);
+    this.refreshActiveStates([]);
     new Notice("已清空当前笔记标签。", 2000);
   }
 

@@ -210,6 +210,11 @@ export default class QuickTagPlugin extends Plugin {
 
     const previousTagSet = new Set(previousTags);
     const addedTags = currentTags.filter((tag) => !previousTagSet.has(tag));
+
+    if (this.app.workspace.getActiveFile()?.path === file.path) {
+      this.refreshViews(false);
+    }
+
     if (addedTags.length === 0) {
       return;
     }
