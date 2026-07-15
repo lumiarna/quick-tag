@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Quick Tag — fast frontmatter tags for Obsidian</title>
+  <desc id="desc">A project-native illustration of the Quick Tag sidebar, showing hierarchical preset tags, recent tags, and the resulting YAML frontmatter.</desc>
+
+  <rect width="1200" height="420" rx="28" fill="#17151D"/>
+  <path d="M0 352H1200" stroke="#302C3A"/>
+  <path d="M614 0V420" stroke="#25222D"/>
+
+  <g transform="translate(64 56)">
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="600" letter-spacing="1.5">
+      <text fill="#AFA8BC">OBSIDIAN SIDEBAR PLUGIN</text>
+      <text x="236" fill="#726B7E">/</text>
+      <text x="255" fill="#72D5AE">FRONTMATTER</text>
+    </g>
+
+    <text y="104" fill="#F7F4FB" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="68" font-weight="760" letter-spacing="-2.5">Quick</text>
+    <text x="180" y="104" fill="#A78BFA" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="68" font-weight="760" letter-spacing="-2.5">Tag</text>
+
+    <text y="150" fill="#D8D2E2" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="24" font-weight="500">Toggle frontmatter tags without leaving your note.</text>
+    <text y="185" fill="#938C9F" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="18">Preset hierarchy on the left. Recent context on the right.</text>
+
+    <g transform="translate(0 224)">
+      <rect width="126" height="38" rx="9" fill="#A78BFA"/>
+      <text x="63" y="25" text-anchor="middle" fill="#17151D" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="15" font-weight="700">click a tag</text>
+      <path d="M145 19H190M182 11L190 19L182 27" fill="none" stroke="#726B7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="210" width="210" height="38" rx="9" fill="#24212C" stroke="#403A4A"/>
+      <text x="315" y="25" text-anchor="middle" fill="#72D5AE" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">frontmatter updated</text>
+    </g>
+
+    <g transform="translate(0 311)" fill="#AAA3B4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">
+      <text>HIERARCHY</text>
+      <text x="130">RECENTS</text>
+      <text x="242">RESPONSIVE</text>
+    </g>
+  </g>
+
+  <g transform="translate(660 34)">
+    <rect width="486" height="352" rx="20" fill="#201D27" stroke="#484152" stroke-width="1.5"/>
+
+    <g transform="translate(22 19)">
+      <path d="M4 3H15L22 10V21H11L4 14Z" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="9" cy="9" r="1.8" fill="#A78BFA"/>
+      <text x="34" y="18" fill="#F7F4FB" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="650">Quick tag</text>
+      <rect x="322" width="120" height="28" rx="7" fill="#292531"/>
+      <text x="382" y="19" text-anchor="middle" fill="#AFA8BC" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12">Clear current tags</text>
+    </g>
+
+    <path d="M0 64H486" stroke="#383240"/>
+
+    <g transform="translate(22 86)">
+      <text fill="#8F889B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="700" letter-spacing="1">PRESET TAGS</text>
+      <text x="300" fill="#8F889B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="700" letter-spacing="1">RECENT</text>
+
+      <g transform="translate(0 22)" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13">
+        <rect width="252" height="32" rx="8" fill="#2C2834" stroke="#4B4556"/>
+        <text x="13" y="21" fill="#CFC8D9" font-weight="650">▸ project</text>
+
+        <rect y="40" width="86" height="29" rx="7" fill="#2A2632"/>
+        <text x="43" y="59" text-anchor="middle" fill="#B8B1C4">frontend</text>
+        <text x="94" y="59" fill="#8F889B">→</text>
+        <rect x="108" y="40" width="45" height="29" rx="7" fill="#A78BFA"/>
+        <text x="130.5" y="59" text-anchor="middle" fill="#17151D" font-weight="700">ui</text>
+
+        <rect y="79" width="252" height="32" rx="8" fill="#2C2834" stroke="#4B4556"/>
+        <text x="13" y="100" fill="#CFC8D9" font-weight="650">▸ writing</text>
+
+        <rect y="119" width="55" height="29" rx="7" fill="#2A2632"/>
+        <text x="27.5" y="138" text-anchor="middle" fill="#B8B1C4">draft</text>
+        <rect x="63" y="119" width="68" height="29" rx="7" fill="#2A2632"/>
+        <text x="97" y="138" text-anchor="middle" fill="#B8B1C4">research</text>
+
+        <rect x="300" width="66" height="29" rx="7" fill="#2A2632"/>
+        <text x="333" y="19" text-anchor="middle" fill="#B8B1C4">idea</text>
+        <rect x="300" y="38" width="93" height="29" rx="7" fill="#2A2632"/>
+        <text x="346.5" y="57" text-anchor="middle" fill="#B8B1C4">reference</text>
+        <rect x="300" y="76" width="62" height="29" rx="7" fill="#2A2632"/>
+        <text x="331" y="95" text-anchor="middle" fill="#B8B1C4">todo</text>
+      </g>
+    </g>
+
+    <g transform="translate(22 289)">
+      <rect width="442" height="44" rx="9" fill="#15131A" stroke="#37313F"/>
+      <text x="14" y="18" fill="#A49DAC" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">frontmatter</text>
+      <text x="14" y="34" fill="#D8D2E2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">tags: [project/frontend/ui, idea]</text>
+      <circle cx="421" cy="22" r="5" fill="#72D5AE"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
+  <title id="title">Quick Tag 从设置到 frontmatter 的标签流程</title>
+  <desc id="desc">三步流程：定义斜杠分隔的预设标签、点击侧边栏标签芯片，然后由 Quick Tag 更新 YAML frontmatter 与最近标签。</desc>
+
+  <rect width="1200" height="340" rx="24" fill="#F5F2F8"/>
+  <text x="54" y="49" fill="#4C4557" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700" letter-spacing="1.4">一个简短、可见的循环</text>
+  <path d="M54 70H1146" stroke="#DAD4E1"/>
+
+  <path d="M356 174H421M413 166L421 174L413 182" fill="none" stroke="#7555C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M777 174H842M834 166L842 174L834 182" fill="none" stroke="#7555C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(54 96)">
+    <text fill="#7555C7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700">01 / 定义</text>
+    <text y="34" fill="#28232F" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="24" font-weight="700">每行写入一个预设标签</text>
+    <rect y="54" width="302" height="98" rx="12" fill="#E9E4EE" stroke="#D3CCDB"/>
+    <text x="17" y="82" fill="#716979" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">项目/前端/UI</text>
+    <text x="17" y="106" fill="#716979" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">写作/草稿</text>
+    <text x="17" y="130" fill="#716979" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">灵感</text>
+  </g>
+
+  <g transform="translate(445 96)">
+    <text fill="#7555C7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700">02 / 切换</text>
+    <text y="34" fill="#28232F" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="24" font-weight="700">点击侧边栏标签芯片</text>
+    <rect y="54" width="302" height="98" rx="12" fill="#25212B"/>
+    <rect x="18" y="70" width="266" height="29" rx="7" fill="#332E3A" stroke="#514A5A"/>
+    <text x="31" y="89" fill="#D9D3E1" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="13" font-weight="650">▸ 项目</text>
+    <rect x="18" y="109" width="74" height="28" rx="7" fill="#332E3A"/>
+    <text x="55" y="128" text-anchor="middle" fill="#C4BDCC" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="13">前端</text>
+    <rect x="101" y="109" width="39" height="28" rx="7" fill="#A78BFA"/>
+    <text x="120.5" y="128" text-anchor="middle" fill="#201C26" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="13" font-weight="700">UI</text>
+  </g>
+
+  <g transform="translate(866 96)">
+    <text fill="#7555C7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="700">03 / 写入</text>
+    <text y="34" fill="#28232F" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="24" font-weight="700">让当前笔记保持同步</text>
+    <rect y="54" width="280" height="98" rx="12" fill="#E9E4EE" stroke="#D3CCDB"/>
+    <text x="17" y="82" fill="#655D6D" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">frontmatter</text>
+    <text x="17" y="108" fill="#39333F" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">tags:</text>
+    <text x="17" y="132" fill="#39333F" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">  - 项目/前端/UI</text>
+    <circle cx="256" cy="26" r="5" fill="#58B993"/>
+  </g>
+
+  <g transform="translate(54 295)">
+    <circle cx="5" cy="-5" r="5" fill="#58B993"/>
+    <text x="19" fill="#686071" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, sans-serif" font-size="16">元数据变化会刷新激活状态与最近标签；预设标签及其父级路径不会进入“最近标签”。</text>
+  </g>
+</svg>

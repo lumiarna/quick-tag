@@ -1,74 +1,108 @@
-# Quick Tag
+<h1 align="center">
+  <img src="./assets/readme/hero-zh.svg" width="100%" alt="Quick Tag——在 Obsidian 侧边栏中快捷切换 frontmatter 标签">
+</h1>
 
-[English README](./README.md)
+<p align="center">
+  <a href="./README.md">English</a> ·
+  <a href="https://github.com/lumiarna/quick-tag/releases/latest">最新版本</a> ·
+  <a href="./LICENSE">MIT 许可证</a>
+</p>
 
-用于在 Obsidian 侧边栏中快速添加或移除笔记标签。
+Quick Tag 把重复的标签编辑留在 Obsidian 侧边栏里。预先定义常用标签，用斜杠路径整理层级，然后点击标签芯片，即可为当前笔记添加或移除标签。
 
-## 功能
+## 点一下，frontmatter 就更新
 
-- 侧边栏面板分为两列：
-- 左列：预设标签，按 `/` 路径层级展示（例如 `project/frontend/ui`）
-- 右列：最近使用标签，按时间倒序
-- 点击任意标签按钮，可切换当前笔记 frontmatter 中的 `tags`
-- 当前笔记中已生效的 frontmatter 标签会高亮显示
-- 工具栏操作：
-- `Clear current tags`：清空当前笔记的全部 frontmatter 标签
-- `Settings`：直接跳转到插件设置页
-- 最近标签行为：
-- 笔记标签更新后，会自动从元数据变化中记录新增标签
-- 预设标签及其父级路径不会进入最近标签
-- 最近标签数量可配置，范围 5 到 50
-- 在窄侧边栏下会自动切换为单列布局
+假设笔记最初是：
 
-## 要求
+```yaml
+---
+tags:
+  - notes
+---
+```
 
-- Obsidian `>= 1.4.0`
+在 Quick Tag 面板中点击 `项目/前端/UI`。芯片会进入激活状态，笔记随即变为：
 
-## 安装（开发环境）
+```yaml
+---
+tags:
+  - notes
+  - 项目/前端/UI
+---
+```
 
-1. 构建插件：
+不必反复打开命令面板，也不必手动编辑 YAML。
+
+## 常用标签始终触手可及
+
+- **预设层级**：每行写入一个标签，用 `/` 组织关联路径。
+- **最近上下文**：新增标签按时间倒序记录；预设标签及其父级路径会被过滤。
+- **状态可见**：当前笔记已有的 frontmatter 标签会在面板中高亮。
+- **专注操作**：可一次清空当前笔记的全部 frontmatter 标签。
+- **窄窗口适配**：应用窗口较窄时，双栏面板会自动切换为单栏。
+
+## 工作方式
+
+<p align="center">
+  <img src="./assets/readme/workflow-zh.svg" width="100%" alt="Quick Tag 从预设设置、侧边栏点击到 YAML frontmatter 更新的流程">
+</p>
+
+Quick Tag 通过 Obsidian 的 frontmatter API 切换标签。元数据变化会刷新标签芯片状态，并更新最近标签列表；列表上限可设为 5～50 条。
+
+## 安装
+
+### 从 Release 安装
+
+1. 从[最新版本](https://github.com/lumiarna/quick-tag/releases/latest)下载 `main.js`、`manifest.json` 和 `styles.css`。
+2. 在仓库中创建目录：
+
+   ```text
+   <你的仓库>/.obsidian/plugins/quick-tag/
+   ```
+
+3. 将三个文件放入该目录。
+4. 重新加载 Obsidian，然后前往 **设置 → 第三方插件** 启用 **Quick Tag**。
+
+### 从源码构建
 
 ```bash
+git clone https://github.com/lumiarna/quick-tag.git
+cd quick-tag
 npm install
 npm run build
 ```
 
-本项目使用 npm，并通过 `package-lock.json` 锁定依赖解析。
+将生成的 `main.js` 连同 `manifest.json`、`styles.css` 复制到同一个插件目录，然后在 Obsidian 中启用插件。
 
-2. 将以下文件复制到你的 vault 插件目录：
+> 需要 Obsidian 1.4.0 或更高版本。
 
-- `main.js`
-- `manifest.json`
-- `styles.css`
+## 第一次使用
 
-示例路径：
+1. 打开 **设置 → 第三方插件 → Quick Tag**。
+2. 每行添加一个预设标签，并用 `/` 表示层级：
 
-```text
-<your-vault>/.obsidian/plugins/quick-tag/
-```
+   ```text
+   项目/前端/UI
+   项目/后端/API
+   写作/草稿
+   ```
 
-3. 在 Obsidian 的 Community plugins 中启用 `Quick Tag`。
+3. 在命令面板中运行 **Show tag panel**。工作区布局就绪后，面板也会自动打开。
+4. 点击任意预设标签或最近标签，即可在当前笔记中切换它。
 
-## 使用
+设置页还可以调整最近标签数量或清空最近记录；面板工具栏可以清空当前笔记的全部 frontmatter 标签。
 
-1. 打开标签面板：
-- 执行命令 `Show tag panel`，或
-- 首次安装后重启 Obsidian（布局就绪时会自动打开面板）
-2. 配置预设标签：
-- Settings -> Community plugins -> Quick Tag
-- 在 `Tag list` 中按行输入标签
-- 使用 `/` 表示层级
-3. 在预设标签或最近标签中点击按钮即可切换标签。
-4. 管理最近标签：
-- 在 `Maximum recent tags` 中设置数量（5 到 50）
-- 在设置页中点击 `Clear recent tags` 清空最近列表
+## 行为说明
 
-## 说明
+- 标签会以数组形式写入 frontmatter 的 `tags` 字段。
+- 激活高亮以当前笔记的 frontmatter 标签为准。
+- 最近标签来自 Obsidian 的元数据更新，包括 frontmatter 与行内标签新增。
+- 预设标签和最近标签会规范化开头的 `#` 与斜杠路径两侧的多余空格。
 
-- 标签切换会把 frontmatter `tags` 写为数组形式。
-- 高亮状态基于当前笔记 frontmatter 的 `tags` 字段。
+<details>
+<summary><strong>开发与发布流程</strong></summary>
 
-## 开发
+### 常用命令
 
 ```bash
 npm run dev
@@ -76,29 +110,19 @@ npm run build
 npm run lint
 ```
 
-## 发布
+### 发布
 
-1. 通过 npm 升级版本，这样 `package.json`、`manifest.json` 和 `versions.json` 会保持同步：
-
-```bash
-npm version 0.1.3
-```
-
-2. 推送 `npm version` 创建的提交和 tag：
+通过 npm 升级版本，使 `package.json`、`manifest.json` 和 `versions.json` 保持同步：
 
 ```bash
+npm version patch
 git push --follow-tags
 ```
 
-3. 随后 GitHub Actions 会自动：
+发布工作流会校验 Git tag 与 package、manifest 版本一致，并确认它存在于 `versions.json` 中；随后构建插件，将 `main.js`、`manifest.json`、`styles.css` 作为 Release 附件发布。仓库中的 `.npmrc` 已移除 npm 默认的 `v` tag 前缀。
 
-- 校验 Git tag 与 `package.json`、`manifest.json` 以及 `versions.json` 中的版本记录一致
-- 要求 Git tag 使用不带 `v` 前缀的纯语义化版本号
-- 构建插件
-- 创建 GitHub release，并上传 `main.js`、`manifest.json`、`styles.css`
-
-仓库 `.npmrc` 设置了 `tag-version-prefix=`，因此 `npm version` 会创建 `0.1.3` 这种 tag，而不是 `v0.1.3`。
+</details>
 
 ## 许可证
 
-MIT
+[MIT](./LICENSE)
