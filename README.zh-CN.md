@@ -1,8 +1,3 @@
----
-created: 2026-03-11T14:37:00
-updated: 2026-06-09T20:40:43
----
-
 # Quick Tag
 
 [English README](./README.md)
